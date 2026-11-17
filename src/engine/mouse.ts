@@ -74,7 +74,11 @@ export class MouseInput {
 
   down(e: PointerEvent): void {
     if (!this.enabled) return;
-    this.el.setPointerCapture?.(e.pointerId);
+    try {
+      this.el.setPointerCapture?.(e.pointerId);
+    } catch {
+      // Ignore NotFoundError/InvalidStateError on synthetic or already-released pointers
+    }
     this.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
     const t = this.stamp(e);
     if (this.pointers.size === 2) {

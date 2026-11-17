@@ -666,10 +666,15 @@ export default function MerlinExperience() {
     }
 
     const onOutsidePointerDown = (e: PointerEvent) => {
-      const target = e.target as Node | null;
-      if (helpEl.hidden || (target && (helpEl.contains(target) || helpBtn.contains(target)))) return;
+      const target = e.target;
+      if (
+        helpEl.hidden ||
+        (target instanceof Node && (helpEl.contains(target) || helpBtn.contains(target)))
+      ) {
+        return;
+      }
       hideHelp();
-      if (e.target === mouse.el) e.stopPropagation();
+      if (target === mouse.el) e.stopPropagation();
     };
     window.addEventListener('pointerdown', onOutsidePointerDown, true);
 

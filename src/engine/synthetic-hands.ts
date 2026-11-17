@@ -71,7 +71,9 @@ export interface SynthHandSpec {
 }
 
 export function synthHand(spec: SynthHandSpec, aspect = 16 / 9): { lm: Landmark3D[]; world: Landmark3D[]; handed: string } {
-  const q = Array.isArray(spec.quat) ? new THREE.Quaternion(...spec.quat) : spec.quat || new THREE.Quaternion();
+  const q = Array.isArray(spec.quat)
+    ? new THREE.Quaternion(...spec.quat)
+    : spec.quat || (spec.euler ? eulerQuat(spec.euler[0], spec.euler[1], spec.euler[2]) : new THREE.Quaternion());
   const open = spec.open ?? 1;
   const s = spec.scale ?? 1;
   const local = [new THREE.Vector3(0, 0, 0), ...thumbPoints(open)];
