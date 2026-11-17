@@ -28,7 +28,11 @@ export const viewport: Viewport = {
   themeColor: "#03070c",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body data-ui="full" className="booting" suppressHydrationWarning>

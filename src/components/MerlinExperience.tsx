@@ -7,6 +7,7 @@ import { Viewer, MODES, look, BG, type LookMode } from '@/engine/scene';
 import { ModelControl, controlTuning } from '@/engine/control';
 import { Gestures, gestureTuning, type GestureEventData, type HudState } from '@/engine/gestures';
 import {
+  BASE_PATH,
   HandTracker,
   Detector,
   startCamera,
@@ -986,7 +987,7 @@ export default function MerlinExperience() {
       <img
         ref={posterRef}
         id="poster"
-        src="/poster.webp"
+        src={`${BASE_PATH}/poster.webp`}
         alt=""
         aria-hidden="true"
         fetchPriority="high"

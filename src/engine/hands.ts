@@ -1,8 +1,10 @@
 import * as THREE from 'three';
 import { OneEuro, PoseFilterQuat, PoseFilterVec, integrateQuat } from './filters';
 
-export const MP_BASE = '/mediapipe';
-export const MODEL_URL = '/mediapipe/hand_landmarker.task';
+export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '';
+export const MP_BASE = `${BASE_PATH}/mediapipe`;
+export const MODEL_URL = `${MP_BASE}/hand_landmarker.task`;
+export const WORKER_URL = `${BASE_PATH}/detector-worker.js`;
 
 const PALM = [0, 5, 9, 13, 17];
 const FINGERS: [number, number, number, number][] = [
@@ -228,7 +230,7 @@ export class Detector {
     return new Promise((resolve, reject) => {
       let w: Worker;
       try {
-        w = new Worker('/detector-worker.js', { type: 'module' });
+        w = new Worker(WORKER_URL, { type: 'module' });
       } catch (err) {
         reject(err);
         return;

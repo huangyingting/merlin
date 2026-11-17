@@ -11,12 +11,14 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-For an optimized production build:
+For an optimized static production export (`./out`):
 
 ```bash
 npm run build
-npm run start
+npx serve out
 ```
+
+When deploying under a subpath (such as GitHub Pages `/merlin`), set `NEXT_PUBLIC_BASE_PATH=/merlin` at build time (configured automatically in `.github/workflows/deploy.yml`).
 
 ## Controls
 

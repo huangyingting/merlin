@@ -1,6 +1,6 @@
 // detector-worker.js - MediaPipe Hand Landmarker off the main thread, so hand
 // tracking never stalls rendering. Frames arrive as transferred ImageBitmaps.
-import { FilesetResolver, HandLandmarker } from '/mediapipe/vision_bundle.mjs';
+import { FilesetResolver, HandLandmarker } from './mediapipe/vision_bundle.mjs';
 
 const NATIVE_NOISE = /^(INFO: |[IW]\d{4} \d\d:\d\d:\d\d|Graph successfully started running)/;
 for (const k of ['error', 'warn', 'info', 'log']) {
@@ -11,8 +11,8 @@ for (const k of ['error', 'warn', 'info', 'log']) {
   };
 }
 
-const BASE = '/mediapipe/wasm';
-const MODEL = '/mediapipe/hand_landmarker.task';
+const BASE = new URL('./mediapipe/wasm', self.location.href).href;
+const MODEL = new URL('./mediapipe/hand_landmarker.task', self.location.href).href;
 
 let lm = null;
 let delegate = null;
